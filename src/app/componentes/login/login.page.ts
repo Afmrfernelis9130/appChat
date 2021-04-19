@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthService } from '../../service/auth.service';
-
-@Component({
+import {Router } from "@angular/router"
+ @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
@@ -10,16 +10,18 @@ export class LoginPage implements OnInit {
 
   email: string;
   password: string;
-  
-  constructor(private authService: AuthService) { }
+
+  constructor(private authService: AuthService,private router: Router) { }
 
   ngOnInit() {
   }
-  
-  onSubmitLogin() {
-    
-    console.log("weo")
-    
-  }
 
+  onSubmitLogin() {
+
+    this.authService.login(this.email, this.password).then(response => {
+      this.router.navigate(['/home'])
+    }).catch(err => alert("User or password incorrect"))
+
+
+  }
 }
