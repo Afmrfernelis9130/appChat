@@ -4,6 +4,7 @@ import {promise} from 'protractor';
 import {Router} from "@angular/router";
 import {AngularFirestore} from "@angular/fire/firestore";
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -22,6 +23,14 @@ export class AuthService {
 
     });
 
+  }
+
+  logout(){
+
+    this.AFauth.signOut().then(() => {
+      this.router.navigate(['/login']);
+
+    })
   }
 
 
